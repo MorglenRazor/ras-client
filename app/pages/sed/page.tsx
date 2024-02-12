@@ -1,9 +1,9 @@
 "use client"
-
+import { useEffect, useState } from "react"
+import Title from "antd/es/typography/Title";
 import { SedLetters } from "@/app/components/SedLetter/SedLetter";
 import { getAllLetters } from "@/app/services/SedLetterService";
-import Title from "antd/es/skeleton/Title";
-import { useEffect, useState } from "react"
+
 
 export default function SedLetterPage() {
     const defaultValue = {

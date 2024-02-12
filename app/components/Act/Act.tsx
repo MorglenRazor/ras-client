@@ -1,4 +1,4 @@
-import {Divider, Table, TableColumnsType} from "antd";
+import {Button, Divider, Table, TableColumnsType} from "antd";
 import { Console } from "console";
 import React, { Children } from "react";
 
@@ -90,6 +90,8 @@ export const Acts = ({acts}:Props) =>{
     return (
 
         <div>
+            <Button type="primary" shape="circle">+</Button>
+
             <Divider />
 
             <Table

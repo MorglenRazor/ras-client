@@ -1,5 +1,4 @@
 export interface ActRequest{
-    actId: string;
     numAct: string;
     placeCollect: string;
     dateTimeReceipt: [number,number,number,number,number,number];

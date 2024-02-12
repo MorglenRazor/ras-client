@@ -1,5 +1,4 @@
 export interface SedLetterRequest{
-    id: string;
     numSed: string;
     linkToLetterSED: string;
     dateGetLetterSED: [number,number,number,number,number,number];

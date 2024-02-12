@@ -25,12 +25,12 @@ const columns: TableColumnsType<SedLetter> = [
 ];
 
 const rowSelection = {
-    onchange: (selectedRowKeys: React.Key[], selectedRows: ActDetails[]) => {
+    onchange: (selectedRowKeys: React.Key[], selectedRows: SedLetter[]) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     },
 
-    getCheckboxProps: (record: ActDetails) => ({
-        name: record.numAct
+    getCheckboxProps: (record: SedLetter) => ({
+        name: record.numSed
     }),
 };
 
