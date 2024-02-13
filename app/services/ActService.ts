@@ -1,3 +1,7 @@
+import { ReagentRequest } from "./ReagentService";
+import { SedLetterRequest } from "./SedLetterService";
+import { TfhRequest } from "./TfhService";
+
 export interface ActRequest{
     numAct: string;
     placeCollect: string;
@@ -5,10 +9,11 @@ export interface ActRequest{
     dateTimeCollect: [number,number,number,number,number,number];
     docs: string;
     comment: string;
-    sedLetter: SedLetter;
-    customer: Tfh;
-    contractor: Tfh;
-    methodObtaining:Tfh;
+    // sedLetter: SedLetterRequest;
+    // customer: TfhRequest;
+    // contractor: TfhRequest;
+    // methodObtaining:TfhRequest;
+    // reagents: ReagentRequest[];
 }
 
 export const getActs = async () =>{

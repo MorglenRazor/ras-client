@@ -5,6 +5,12 @@ import { useEffect, useState } from "react";
 import Title from "antd/es/typography/Title";
 import { ActRequest, createAct, deleteAct, getActs, getDetailsActs, updateAct } from "@/app/services/ActService";
 import { Acts } from "@/app/components/Act/Act";
+import { Mode } from "@/app/shared/Mode";
+import { Button } from "antd";
+import { CreateUpdateAct } from "@/app/components/Act/CreateUpdateAct";
+import { AddLetterInAct } from "@/app/components/SedLetter/AddLetterInAct";
+
+
 
 export default function ActsPage(){
     const defaultValues = {
@@ -13,16 +19,16 @@ export default function ActsPage(){
         dateTimeReceipt: [0, 0, 0, 0, 0, 0],
         dateTimeCollect: [0, 0, 0, 0, 0, 0],
         docs: "",
-        comment: "",
-        sedLetter: {},
-        customer: {},
-        contractor: {},
-        methodObtaining: {},
+        comment: ""
     } as Act;
 
+    
     const [values, setValuse] = useState<Act>(defaultValues);
+    
     const [acts, setActs] = useState<ActDetails[]>([]);
     const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [mode, setMode] = useState(Mode.Create);
     
     useEffect(()=>{
         const getAct = async()=>{
@@ -52,11 +58,45 @@ export default function ActsPage(){
         setActs(acts);
     };
 
+    const openModal = () =>{
+        setMode(Mode.Create);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () =>{
+        setValuse(defaultValues);
+        setIsModalOpen(false);
+    };
+
+    const openEditModal = (act:Act) =>{
+        setMode(Mode.Edit);
+        setValuse(act);
+        setIsModalOpen(true);
+    };
+
     return (
         <div>
+            <Button type="primary" style={{marginTop:"30px"}} size="large" onClick={openModal}>Добавить акт</Button>
+            <CreateUpdateAct
+                mode={mode}
+                values={values}
+                isModalOpen={isModalOpen}
+                handleCancel={closeModal}
+                handleCreateAct={handleCreateAct}
+                handleUpdate={handleUpdateAct}
+            ></CreateUpdateAct>
+            
             {
-                loading ? (<Title>Loading...</Title>) : <Acts acts={acts}/>
+                loading ? (<Title>Loading...</Title>) : 
+                (
+                    <Acts acts={acts}
+                        handleDelete={handleDeleteAct}
+                        handleOpen={openEditModal}
+                    />
+                    
+                )
             }
+            
         </div>
     )
 }

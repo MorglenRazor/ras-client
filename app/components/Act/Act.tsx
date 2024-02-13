@@ -4,6 +4,8 @@ import React, { Children } from "react";
 
 interface Props{
     acts: ActDetails[];
+    handleDelete: (id:string) => void;
+    handleOpen:(id:Act)=>void;
 }
 
 
@@ -72,25 +74,12 @@ const columns: TableColumnsType<ActDetails> = [
     },
     
 ]
-  
-
-// const rowSelection = {
-//     onchange: (selectedRowKeys: React.Key[], selectedRows: ActDetails[]) => {
-//         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-//     },
-
-//     getCheckboxProps: (record: ActDetails) => ({
-//         name: record.numAct
-//     }),
-// };
-
 
 export const Acts = ({acts}:Props) =>{
     console.log(acts);
     return (
 
         <div>
-            <Button type="primary" shape="circle">+</Button>
 
             <Divider />
 

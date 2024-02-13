@@ -5,10 +5,9 @@ import { useEffect, useState } from "react"
 
 interface Props{
     letterValue: SedLetter;
-    handleCancel: ()=> void;
 }
 
-export const AddLetterInAct=({letterValue,handleCancel}:Props) =>{
+export const AddLetterInAct=({letterValue}:Props) =>{
 
     const[numSed, setNumSed] = useState<string>("");
     const[dateLetter, setDateLetter] = useState<[number, number, number, number, number, number]>([0,0,0,0,0,0]);
@@ -29,7 +28,9 @@ export const AddLetterInAct=({letterValue,handleCancel}:Props) =>{
     },[letterValue])
 
     return (
-        <div className="letter_add_to_act">
+        
+        <div className="letter_add_to_act" >
+           
             <p>Письмо СЭД</p>
             <Input
                 value={numSed}
