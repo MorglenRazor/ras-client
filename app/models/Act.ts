@@ -10,4 +10,5 @@ interface Act{
     customer: Tfh;
     contractor: Tfh;
     methodObtaining:Tfh;
+    reagents: Reagent[];
 }

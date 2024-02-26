@@ -1,8 +1,10 @@
 import { Layout } from 'antd'
 import  Menu from 'antd/es/menu/menu'
 import './globals.css'
-import { Content,  Header } from 'antd/es/layout/layout'
+import { Content, Header } from 'antd/es/layout/layout'
 import Link from 'next/link'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
+
 
 const items = [
   {key: "home", label: <Link href={"/"}>Home</Link>},
@@ -14,16 +16,17 @@ const items = [
 
 
 
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  
   return (
     <html lang="en">
+  
       <body>
-        <Layout style={{minHeigth:"100vh"}}>
+        <Layout>
           <Header>
             <Menu 
               theme="dark" 
@@ -32,10 +35,15 @@ export default function RootLayout({
               style={{flex: 1, minWidth:0}}
               />
           </Header>
-          <Content style={{padding: "0 48px"}}>{children}</Content>
+          <AntdRegistry>
+              {children}
+            </AntdRegistry> 
+          
           
         </Layout>
       </body>
+      
+      
     </html>
   )
 }

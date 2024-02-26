@@ -1,5 +1,6 @@
 export interface TfhRequest{
     id: number;
+    strVar: string;
 }
 
 export const getTfh = async (nameHandbook: string) =>{

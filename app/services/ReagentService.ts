@@ -13,6 +13,18 @@ export interface ReagentRequest{
     manufacturerReagent: TfhRequest;
 }
 
+export interface ReagentActRequest{
+    numDoc: string;
+    reagent: TfhRequest;
+    dateIssue: [number,number,number,number,number,number];
+    numWellOrBatch: string;
+    countReagent: string;
+    numSealOnSample: string;
+    sedLetter: SedLetterRequest;
+    manufactirer: TfhRequest;
+    accordance: boolean;
+}
+
 export const getReagents = async () =>{
     const response = await fetch("https://localhost:7015/Reagent");  
     return response.json();

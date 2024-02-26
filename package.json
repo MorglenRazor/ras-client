@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
     "ant": "^0.2.0",
     "antd": "^5.14.0",
     "dayjs": "^1.11.10",

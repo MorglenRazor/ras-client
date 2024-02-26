@@ -1,32 +1,30 @@
+import { SedLetterRequest } from "@/app/services/SedLetterService";
 import { ConverDate } from "@/app/shared/ConverDate";
 import { DatePicker, DatePickerProps, Input } from "antd"
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 interface Props{
-    letterValue: SedLetter;
-}
+    numSed?: string;
+    linkSed?: string;
+    dateSed?: Dayjs;
+    onNumSedChange?: (newType: string) => void;
+    onLinkSedChange?: (newType: string) => void;
+    onDateSedChange?: (newType: Dayjs, dates: string | string[]) => void
+};
 
-export const AddLetterInAct=({letterValue}:Props) =>{
 
-    const[numSed, setNumSed] = useState<string>("");
-    const[dateLetter, setDateLetter] = useState<[number, number, number, number, number, number]>([0,0,0,0,0,0]);
-    const[linkLetter, setLink] = useState<string>("");
-    const[datePick, setDatePick] = useState<Dayjs>();
+export const AddLetterInAct=({numSed,linkSed,dateSed,
+    onNumSedChange,onLinkSedChange,onDateSedChange}:Props) =>{
 
-    const onChange: DatePickerProps['onChange'] = (date) => {
-        setDatePick(date);
-        var datesss= datePick?.toString();
-        var dt = dayjs(datesss).toDate()
-        setDateLetter(ConverDate(dt));
-    }
 
-    useEffect(()=>{
-        setNumSed(letterValue.numSed);
-        setLink(letterValue.linkToLetterSED);
-        setDateLetter(letterValue.dateGetLetterSED);
-    },[letterValue])
+    // useEffect(()=>{
+    //     setNumSed(letterValue.numSed);
+    //     setLink(letterValue.linkToLetterSED);
+    //     setDateLetter(letterValue.dateGetLetterSED);
+    // },[letterValue])
 
+   
     return (
         
         <div className="letter_add_to_act" >
@@ -34,15 +32,15 @@ export const AddLetterInAct=({letterValue}:Props) =>{
             <p>Письмо СЭД</p>
             <Input
                 value={numSed}
-                onChange={(e)=>setNumSed(e.target.value)}
+                onChange={(event) => onNumSedChange?.(event.target.value)}
                 placeholder="Номер СЭД"></Input>
             <Input
-                value={linkLetter}
-                onChange={(e)=>setLink(e.target.value)}
+                value={linkSed}
+                onChange={(event) => onLinkSedChange?.(event.target.value)}
                 placeholder="Ссылка на СЭД"></Input>
             <DatePicker
-                value={datePick}
-                onChange={onChange}></DatePicker>
+                value={dateSed}
+                onChange={onDateSedChange}></DatePicker>
         </div>
     )
 }

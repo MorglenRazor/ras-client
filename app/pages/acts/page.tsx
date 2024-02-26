@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, createContext, useEffect, useState } from "react";
 
 import Title from "antd/es/typography/Title";
 import { ActRequest, createAct, deleteAct, getActs, getDetailsActs, updateAct } from "@/app/services/ActService";
@@ -19,7 +19,8 @@ export default function ActsPage(){
         dateTimeReceipt: [0, 0, 0, 0, 0, 0],
         dateTimeCollect: [0, 0, 0, 0, 0, 0],
         docs: "",
-        comment: ""
+        comment: "",
+        sedLetter: {id:"", numSed:"", dateGetLetterSED:[0,0,0,0,0,0], linkToLetterSED:""}
     } as Act;
 
     
@@ -31,6 +32,7 @@ export default function ActsPage(){
     const [mode, setMode] = useState(Mode.Create);
     
     useEffect(()=>{
+        
         const getAct = async()=>{
             const acts = await getDetailsActs();
             
@@ -44,6 +46,7 @@ export default function ActsPage(){
         await createAct(request);
         const acts = await getActs();
         setActs(acts);
+        //closeModal();
     };
 
     const handleUpdateAct = async (id:string,request: ActRequest) => {
@@ -76,27 +79,26 @@ export default function ActsPage(){
 
     return (
         <div>
-            <Button type="primary" style={{marginTop:"30px"}} size="large" onClick={openModal}>Добавить акт</Button>
-            <CreateUpdateAct
-                mode={mode}
-                values={values}
-                isModalOpen={isModalOpen}
-                handleCancel={closeModal}
-                handleCreateAct={handleCreateAct}
-                handleUpdate={handleUpdateAct}
-            ></CreateUpdateAct>
-            
-            {
-                loading ? (<Title>Loading...</Title>) : 
-                (
-                    <Acts acts={acts}
-                        handleDelete={handleDeleteAct}
-                        handleOpen={openEditModal}
-                    />
-                    
-                )
-            }
-            
+             <Button type="primary" style={{marginTop:"30px"}} size="large" onClick={openModal}>Добавить акт</Button>
+                <CreateUpdateAct
+                    mode={mode}
+                    values={values}
+                    isModalOpen={isModalOpen}
+                    handleCreateAct={handleCreateAct}
+                    handleUpdate={handleUpdateAct}
+                    handleCancel={closeModal}
+                ></CreateUpdateAct>
+                
+                {
+                    loading ? (<Title>Loading...</Title>) : 
+                    (
+                        <Acts acts={acts}
+                            handleDelete={handleDeleteAct}
+                            handleOpen={openEditModal}
+                        />
+                        
+                    )
+                }   
         </div>
     )
 }

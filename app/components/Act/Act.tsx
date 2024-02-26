@@ -1,6 +1,5 @@
-import {Button, Divider, Table, TableColumnsType} from "antd";
-import { Console } from "console";
-import React, { Children } from "react";
+import { Divider, Table, TableColumnsType} from "antd";
+import React from "react";
 
 interface Props{
     acts: ActDetails[];
@@ -76,11 +75,10 @@ const columns: TableColumnsType<ActDetails> = [
 ]
 
 export const Acts = ({acts}:Props) =>{
-    console.log(acts);
+    
     return (
-
+        
         <div>
-
             <Divider />
 
             <Table
