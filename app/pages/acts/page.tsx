@@ -9,6 +9,7 @@ import { Mode } from "@/app/shared/Mode";
 import { Button } from "antd";
 import { CreateUpdateAct } from "@/app/components/Act/CreateUpdateAct";
 import { AddLetterInAct } from "@/app/components/SedLetter/AddLetterInAct";
+import { TfhRequest, getTfh } from "@/app/services/TfhService";
 
 
 
@@ -27,6 +28,10 @@ export default function ActsPage(){
     const [values, setValuse] = useState<Act>(defaultValues);
     
     const [acts, setActs] = useState<ActDetails[]>([]);
+    const [mos, setMos] = useState<TfhRequest[]>([]);
+    const [cus, setCus] = useState<TfhRequest[]>([]);
+    const [cont, setCont] = useState<TfhRequest[]>([]);
+
     const [loading, setLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [mode, setMode] = useState(Mode.Create);
@@ -39,7 +44,25 @@ export default function ActsPage(){
             setLoading(false);
             setActs(acts);
         }
+        const getMethodobtainitng = async()=>{
+            const getMo = await getTfh("methodsObtaining");
+            setMos(getMo);
+        }
+
+        const getCustomers = async()=>{
+            const getCus = await getTfh("customers");
+            setCus(getCus);
+        }
+
+        const getContractor = async()=>{
+            const getCont = await getTfh("contactors");
+            setCont(getCont);
+        }
+    
         getAct();
+        getMethodobtainitng();
+        getCustomers();
+        getContractor();
     },[]);
 
     const handleCreateAct = async (request:ActRequest) => {
@@ -87,6 +110,9 @@ export default function ActsPage(){
                     handleCreateAct={handleCreateAct}
                     handleUpdate={handleUpdateAct}
                     handleCancel={closeModal}
+                    mo={mos}
+                    cus={cus}
+                    cont={cont}
                 ></CreateUpdateAct>
                 
                 {
